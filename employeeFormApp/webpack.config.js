@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
   entry: "./src/index.js",
@@ -7,7 +8,7 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    publicPath: "/",
+    publicPath: "auto",
   },
   mode: "development",
   module: {
@@ -30,6 +31,21 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
+    new ModuleFederationPlugin({
+      name: "empForm", 
+      filename: "remoteEntry.js", 
+      exposes: {
+        "./App": "./src/App", 
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: "^19.1.0" },
+        "react-dom": { singleton: true, requiredVersion: "^19.1.0" }
+        // "../shared/store": {
+        //   import: path.resolve(__dirname, "../shared/store.js"),
+        //   singleton: true,
+        // },
+      },
+    })
   ],
   devServer: {
     static: {
