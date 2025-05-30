@@ -38,9 +38,16 @@ module.exports = {
       exposes: {
         "./App": "./src/App", 
       },
+      remotes: {
+        empForm: "empForm@http://localhost:3001/remoteEntry.js",
+      },
       shared: {
         react: { singleton: true, requiredVersion: "^19.1.0" },
         "react-dom": { singleton: true, requiredVersion: "^19.1.0" },
+         "react-redux": { singleton: true },
+        "redux": { singleton: true },
+        "redux-thunk": { singleton: true },
+
         // "../shared/store": {
         //   import: path.resolve(__dirname, "../shared/store.js"),
         //   singleton: true,

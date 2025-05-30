@@ -41,6 +41,10 @@ module.exports = {
       shared: {
         react: { singleton: true },
         "react-dom": { singleton: true },
+         "react-redux": { singleton: true },
+        "redux": { singleton: true },
+        "redux-thunk": { singleton: true },
+
         // "../shared/store": {
         //   import: path.resolve(__dirname, "../shared/store.js"),
         //   singleton: true,
